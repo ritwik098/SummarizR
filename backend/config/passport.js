@@ -19,7 +19,13 @@ var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
   // mongo.checkUserExists(jwt_payload, function(error, result) {
   //   next(error, result);
   // });
-  next(null,{"user": "abc"});
+  next(null,{
+  "iat": 1497340378, 
+  "exp": 1497343978,
+  "aud": "social-logins-spa",
+  "iss": "social-logins-spa",
+  "sub": "0"
+});
 });
 
 passport.use(strategy);
@@ -41,7 +47,7 @@ passport.deserializeUser(function(obj, done) {
 // passport.use(new FacebookStrategy({
 //     clientID: FACEBOOK_APP_ID,
 //     clientSecret: FACEBOOK_APP_SECRET,
-//     callbackURL: "/auth/facebook/callback",
+//     callbackURL: "/auth/facebook/redirect",
 //     profileFields: ['id', 'email', 'name', 'picture']
 //   },
 //   function(accessToken, refreshToken, profile, cb) {

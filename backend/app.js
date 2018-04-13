@@ -12,6 +12,9 @@ var auth = require('./routes/auth');
 const config = require('./config/config');
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
+const token = require('./utils/token');
+
+require('./config/passport');
 
 var app = express();
 app.use(passport.initialize());
@@ -29,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use('/auth', auth);
-app.use('/', passport.authenticate(['jwt'], { session: false }), index);
+app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -49,5 +52,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+console.log(token.generateAccessToken({"id": "askdjfhka"}));
 
 module.exports = app;
