@@ -39,35 +39,35 @@ passport.deserializeUser(function(obj, done) {
 });
 
 /*  FACEBOOK AUTH  */
-// const FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
-// const FACEBOOK_APP_ID = config.facebook.CLIENT_ID;
-// const FACEBOOK_APP_SECRET = config.facebook.CLIENT_SECRET;
+const FACEBOOK_APP_ID = config.facebook.CLIENT_ID;
+const FACEBOOK_APP_SECRET = config.facebook.CLIENT_SECRET;
 
-// passport.use(new FacebookStrategy({
-//     clientID: FACEBOOK_APP_ID,
-//     clientSecret: FACEBOOK_APP_SECRET,
-//     callbackURL: "/auth/facebook/redirect",
-//     profileFields: ['id', 'email', 'name', 'picture']
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     console.log("Adding a new user using Facebook");
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "/auth/facebook/redirect",
+    profileFields: ['id', 'email', 'name', 'picture']
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log("Adding a new user using Facebook");
 
-//     var user = new userSchema();
-//     user.id = profile.id;
-//     user.email = profile.emails[0].value;
-//     user.lastname = profile.name.familyName;
-//     user.firstname = profile.name.givenName;
-//     user.username = null,
-//     user.profilePicture = 'http://graph.facebook.com/' + profile.id + '/picture?type=large';
-//     user.tokens = 25;
-//     user.currentLeague_id = null;
-
-//     mongo.addUser(user, function(error, result) {
-//       return cb(error, JSON.parse(JSON.stringify(result)));
-//     });
-//   }
-// ));
+    var user = {};
+    user.id = profile.id;
+    user.email = profile.emails[0].value;
+    user.lastname = profile.name.familyName;
+    user.firstname = profile.name.givenName;
+    user.username = null,
+    user.profilePicture = 'http://graph.facebook.com/' + profile.id + '/picture?type=large';
+    user.tokens = 25;
+    user.currentLeague_id = null;
+    cb(null, user);
+    // mongo.addUser(user, function(error, result) {
+    //   return cb(error, JSON.parse(JSON.stringify(result)));
+    // });
+  }
+));
 
 /*  GOOGLE AUTH  */
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -94,6 +94,7 @@ passport.use(new GoogleStrategy({
     user.currentLeague_id = null;
 
     console.log(user);
+    cb(null, user);
 
     // mongo.addUser(user, function(error, result) {
     //   return cb(error, JSON.parse(JSON.stringify(result)));
