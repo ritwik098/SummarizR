@@ -12,6 +12,7 @@ var auth = require('./routes/auth');
 const config = require('./config/config');
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
+require('./config/passport');
 
 var app = express();
 app.use(passport.initialize());
@@ -51,5 +52,4 @@ app.use(function(err, req, res, next) {
 });
 
 console.log("Success");
-
 module.exports = app;
