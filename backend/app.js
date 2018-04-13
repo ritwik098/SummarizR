@@ -30,8 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use('/auth', auth);
-app.use('/', passport.authenticate(['jwt'], { session: false }), index);
-app.use('/users', users);
+app.use('/', index);
+app.use('/users', passport.authenticate(['jwt'], { session: false }), users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

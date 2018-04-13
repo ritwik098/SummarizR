@@ -24,7 +24,7 @@
   },
   {
     "type": "GET",
-    "url": "/auth/facebook/callback",
+    "url": "/auth/facebook/redirect",
     "title": "Callback route from Facebook Login",
     "name": "Authentication_Facebook_Callback",
     "group": "User",
@@ -83,7 +83,7 @@
   },
   {
     "type": "GET",
-    "url": "/auth/google/callback",
+    "url": "/auth/google/redirect",
     "title": "Callback route from Google Login",
     "name": "Authentication_Google_Callback",
     "group": "User",
