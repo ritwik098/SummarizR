@@ -53,7 +53,7 @@ function addUser(user, callback) {
 	    if (err) {
 	      callback("We are currently facing some technically difficulties, please try again later!", null);
 	    } else {
-	      var dbo = db.db("cryptoleague_database");
+	      var dbo = db.db("summarizr");
 	      dbo.collection("Users").findOne({'id' : user.id}, function(err, result) {
 	        if (err) {
 	          callback("Error adding the user!", null);
