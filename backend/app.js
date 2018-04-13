@@ -7,8 +7,14 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth');
+
+const config = require('./config/config');
+const passport = require('passport');
+const passportJwt = require('passport-jwt');
 
 var app = express();
+app.use(passport.initialize());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
-app.use('/', index);
+app.use('/auth', auth);
+app.use('/', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
