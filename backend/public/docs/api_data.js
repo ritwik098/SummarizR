@@ -116,5 +116,41 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routes/auth.js",
     "groupTitle": "User"
+  },
+  {
+    "type": "GET",
+    "url": "/user",
+    "title": "Request the user information",
+    "name": "Get_User_Information",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "JWT",
+            "description": "<p>JWT token of the user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "JSON",
+            "optional": false,
+            "field": "JWT",
+            "description": "<p>Returns the updated JWT token of the current user.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/users.js",
+    "groupTitle": "User"
   }
 ] });
