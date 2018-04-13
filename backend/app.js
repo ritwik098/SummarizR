@@ -53,6 +53,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-console.log(token.generateAccessToken({"id": "askdjfhka"}));
+// console.log(token.generateAccessToken({"id": "askdjfhka"}));
 
+console.log("Success");
 module.exports = app;

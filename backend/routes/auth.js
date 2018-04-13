@@ -20,7 +20,7 @@ router.get('/facebook/',
   passport.authenticate('facebook', {scope: ['email', 'public_profile'], session: false }));
 
 /**
- * @api {GET} /auth/facebook/callback Callback route from Facebook Login
+ * @api {GET} /auth/facebook/redirect Callback route from Facebook Login
  * @apiName Authentication_Facebook_Callback
  * @apiGroup User
  *
@@ -43,7 +43,7 @@ router.get('/google/',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email'], session: false }));
 
 /**
- * @api {GET} /auth/google/callback Callback route from Google Login
+ * @api {GET} /auth/google/redirect Callback route from Google Login
  * @apiName Authentication_Google_Callback
  * @apiGroup User
  *
