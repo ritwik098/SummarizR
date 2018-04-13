@@ -93,7 +93,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     console.log("Adding a new user using Google");
 
-    var user = new userSchema();
+    var user = {};
     user.id = profile.id;
     user.email = profile.emails[0].value;
     user.lastname = profile.name.familyName;
