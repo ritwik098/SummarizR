@@ -114,3 +114,6 @@ dll/
 
 # config #
 /config/config.js
+/bin/ssl/ca*
+/bin/ssl/client*
+/bin/ssl/server*

@@ -11,6 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-force-ssl": "^0.3.2",
     "hbs": "~4.0.1",
     "jsonwebtoken": "^8.2.1",
     "lodash": "^4.17.5",

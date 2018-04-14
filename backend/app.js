@@ -17,6 +17,8 @@ const token = require('./utils/token');
 require('./config/passport');
 
 var app = express();
+var forceSsl = require('express-force-ssl');
+
 app.use(passport.initialize());
 
 // view engine setup
@@ -30,7 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
+app.use(forceSsl);
 
+app.use('/', index);
 app.use('/auth', auth);
 app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
