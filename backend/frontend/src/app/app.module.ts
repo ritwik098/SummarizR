@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerifyComponent } from './verify/verify.component';
+import { UploadComponent } from './upload/upload.component';
+import { NotesComponent } from './notes/notes.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { VerifyComponent } from './verify/verify.component';
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    VerifyComponent
+    VerifyComponent,
+    UploadComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,
