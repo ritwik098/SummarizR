@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+var summarizer = require('./routes/summarizer');
 
 const config = require('./config/config');
 const passport = require('passport');
@@ -38,6 +39,7 @@ app.use('/', index);
 app.use('/auth', auth);
 app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
+app.use('/summarizer', passport.authenticate(['jwt'], { session: false }), summarizer);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
