@@ -14,6 +14,7 @@ const config = require('./config/config');
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 const token = require('./utils/token');
+const fileUpload = require('express-fileupload');
 
 require('./config/passport');
 
@@ -34,12 +35,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 app.use(forceSsl);
+app.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
 
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
 app.use('/summarizer', passport.authenticate(['jwt'], { session: false }), summarizer);
+
+app.post('/upload', function(req, res, next) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let video = req.files.video;
+ 	console.log(video);
+  // Use the mv() method to place the file somewhere on your server
+  video.mv(path.join(__dirname, 'uploads', video.name + '-' + Date.now()), function(err) {
+    if (err){
+      console.log(err);
+      return res.status(500).send(err);
+    }
+ 
+    res.send('File uploaded!');
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
