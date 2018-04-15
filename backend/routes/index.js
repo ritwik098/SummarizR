@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var speechToText = require('../utils/speechToText');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -8,7 +10,8 @@ router.get('/', function(req, res, next) {
 
 // src/index.js
 router.get('/api/secure', (req, res) => {
-    res.send('Secure response from ' + JSON.stringify(req.user));
+    speechToText.speechToText("hjjk");
+    res.send("hi");
   }
 );
 
