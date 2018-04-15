@@ -26,16 +26,9 @@ jwtOptions.issuer = config.JWT_ISSUER;
 jwtOptions.audience = config.JWT_AUDIENCE;
 
 var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  // mongo.checkUserExists(jwt_payload, function(error, result) {
-  //   next(error, result);
-  // });
-  next(null,{
-  "iat": 1497340378, 
-  "exp": 1497343978,
-  "aud": "social-logins-spa",
-  "iss": "social-logins-spa",
-  "sub": "0"
-});
+  mongo.checkUserExists(jwt_payload, function(error, result) {
+    next(error, result);
+  });
 });
 
 passport.use(strategy);
@@ -72,10 +65,9 @@ passport.use(new FacebookStrategy({
     user.profilePicture = 'http://graph.facebook.com/' + profile.id + '/picture?type=large';
     user.tokens = 25;
     user.currentLeague_id = null;
-    cb(null, user);
-    // mongo.addUser(user, function(error, result) {
-    //   return cb(error, JSON.parse(JSON.stringify(result)));
-    // });
+    mongo.addUser(user, function(error, result) {
+      return cb(error, JSON.parse(JSON.stringify(result)));
+    });
   }
 ));
 
@@ -93,7 +85,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     console.log("Adding a new user using Google");
 
-    var user = {};
+    var user = new userSchema();
     user.id = profile.id;
     user.email = profile.emails[0].value;
     user.lastname = profile.name.familyName;
@@ -102,10 +94,9 @@ passport.use(new GoogleStrategy({
     user.profilePicture = profile._json.image.url + '0';
 
     console.log(user);
-    cb(null, user);
 
-    // mongo.addUser(user, function(error, result) {
-    //   return cb(error, JSON.parse(JSON.stringify(result)));
-    // });
+    mongo.addUser(user, function(error, result) {
+      return cb(error, JSON.parse(JSON.stringify(result)));
+    });
   }
 ));
