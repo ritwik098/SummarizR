@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "cd frontend && ng build && cd ../ && node ./bin/www"
   },
   "dependencies": {
     "apidoc": "^0.17.6",
