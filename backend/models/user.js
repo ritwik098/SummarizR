@@ -6,7 +6,11 @@ var userSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     username: String,
-    profilePicture: String
+    profilePicture: String,
+    pastNotes: [{
+    	originalText: String,
+    	summarizedText: [String]
+    }]
 });
 
 var User = mongoose.model('User', userSchema);
