@@ -1,54 +1,49 @@
 <div class="columns">
   <div class="column is-one-third">
-    <aside class="menu">
-      <p class="menu-label">
-        <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
-      </p>
-      <ul class="menu-list">
-        <li><a>CS240 Lecture 23</a></li>
-        <li><a class="is-active">MA166 Lecture 13</a></li>
-      </ul>
-      <p class="menu-label">
-        <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
-      </p>
-      <ul class="menu-list">
-        <li><a>CS240 Lecture 23</a></li>
-        <li><a>MA166 Lecture 13</a></li>
-        <li><a>EAPS106 Lecture 12</a></li>
-      </ul>
-    </aside>
+    <div class="content box mainBox">
+      <h2>Full Transcript</h2>
+      <p>{{fullText}}</p>
+    </div>
   </div>
-  <div class="column has-background-info box">
+  <div class="column has-background-info box mainBox">
     <div class="video">
-      <div class="columns is-centered">
-        <div class="field column">
-          <div class="file is-centered is-large is-boxed is-success has-name">
-            <label class="file-label">
-              <input class="file-input" type="file" name="video" ng2FileSelect [uploader]="uploader" (change)="fileEvent($event)"/>
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
+      <div class="videoContainer" *ngIf="uploader.queue[0] && uploader.queue[0].progress >= 99; else uploadBox">
+        <video controls style="width:100%;height:360px;" poster="{{thumbnailURL}}" *ngIf="videoLoaded">
+          <source src="{{videoURL}}" 
+                  type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
+        </video>
+        <a class="button is-info is-loading" *ngIf="!videoLoaded">Loading</a>
+      </div>
+      <ng-template #uploadBox>
+        <div class="columns is-centered" >
+          <div class="field column">
+            <div class="file is-centered is-large is-boxed is-success has-name">
+              <label class="file-label">
+                <input class="file-input" type="file" name="video" ng2FileSelect [uploader]="uploader" (change)="fileEvent($event)"/>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Upload a Video
+                  </span> 
                 </span>
-                <span class="file-label">
-                  Upload a Video
-                </span> 
-              </span>
-              <span ng2FileDrop
-                       (fileOver)="fileOverBase($event)"
-                       [uploader]="uploader"
-                       class="file-name">
-                      {{fileName ? fileName : "or drag the video here"}}
-              </span>
-            </label>
+                <span ng2FileDrop
+                         (fileOver)="fileOverBase($event)"
+                         [uploader]="uploader"
+                         class="file-name">
+                        {{fileName ? fileName : "or drag the video here"}}
+                </span>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
-    <div class="upload-button">
-      
-      <progress class="progress is-success" value="{{uploader.queue[0].progress}}" max="100"  *ngIf="uploader.queue[0].progress; else uploadButton">{{uploader.queue[0].progress}}%</progress>
+    <div class="upload-button" *ngIf="uploader.queue.length > 0">
+      <progress class="progress is-success" value="{{uploader.queue[0].progress}}" max="100"  *ngIf="uploader.queue[0].progress && uploader.queue[0].progress < 100; else uploadButton">{{uploader.queue[0].progress}}%</progress>
       <ng-template #uploadButton>
-        <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [hidden]="!uploader.getNotUploadedItems().length">
           <span class="icon is-small">
             <i class="fas fa-upload" aria-hidden="true"></i>
           </span>
@@ -56,35 +51,17 @@
         </button>
       </ng-template>
     </div>
-    <div>
-      <article class="media has-background-white box">
+    <div class="summaries">
+      <article class="media has-background-white box" *ngFor="let summary of summaries">
         <figure class="media-left">
-          <p>13:34</p>
+          <p>{{summary.time_stamp}}</p>
         </figure>
         <div class="media-content">
           <div class="content">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+              {{summary.sentence}}
             </p>
           </div>
-        </div>
-        <div class="media-right">
-          <button class="delete"></button>
-        </div>
-      </article>
-      <article class="media has-background-white box">
-        <figure class="media-left">
-          <p>13:34</p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-            </p>
-          </div>
-        </div>
-        <div class="media-right">
-          <button class="delete"></button>
         </div>
       </article>
     </div>

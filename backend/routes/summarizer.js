@@ -40,6 +40,7 @@ router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) 
 		    console.log(err);
 		    res.send(400, error_object);
 		  } else {
+		  	console.log("body: "+body);
 		    var json = JSON.parse(body);
 		    summarize.sumarize_text(json.transcript, json.metadata.filename, function(error, response) {
 				if (error) {

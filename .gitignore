@@ -36,7 +36,8 @@ testem.log
 /typings
 backend/uploads
 backend/uploads/*
-
+backend/resources
+backend/resources/*
 # e2e
 /e2e/*.js
 /e2e/*.map

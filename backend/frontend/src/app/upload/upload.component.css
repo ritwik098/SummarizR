@@ -16,3 +16,13 @@
 	justify-content: center;
 	padding: 1em;
 }
+
+.mainBox {
+	max-height: 75vh;
+	overflow: scroll;
+}
+
+.summaries {
+	height: calc(75vh - 360px);
+  overflow: scroll;
+}
