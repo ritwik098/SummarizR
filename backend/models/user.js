@@ -8,8 +8,12 @@ var userSchema = new mongoose.Schema({
     username: String,
     profilePicture: String,
     pastNotes: [{
-    	originalText: String,
-    	summarizedText: [String]
+    	text: String,
+    	sentences: [{
+            sentence: String,
+            time_stamp: Number
+        }],
+        content_url: String
     }]
 });
 

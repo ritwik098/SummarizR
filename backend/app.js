@@ -40,7 +40,7 @@ app.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
-app.use('/users', users);
+app.use('/users', passport.authenticate(['jwt'], { session: false }), users);
 app.use('/summarizer', passport.authenticate(['jwt'], { session: false }), summarizer);
 
 // catch 404 and forward to error handler
