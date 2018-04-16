@@ -13,6 +13,10 @@ export class UploadComponent implements OnInit {
 	public uploader: FileUploader;
 	fileName: string = "";
 	fullText: string = "";
+	summaries: any[];
+	videoLoaded: boolean = false;
+	videoURL: string = "";
+	thumbnailURL: string = "";
 
   constructor() { }
 
@@ -30,6 +34,10 @@ export class UploadComponent implements OnInit {
     console.log(response);
     let res = JSON.parse(response);
     this.fullText = res.text;
+    this.summaries = res.sentences;
+    this.videoLoaded = true;
+    this.videoURL = res.content_url;
+    this.thumbnailURL = res.thumbnail_url;
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
