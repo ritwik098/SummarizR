@@ -1,24 +1,10 @@
 <div class="columns">
   <div class="column is-one-third">
-    <aside class="menu">
-      <p class="menu-label">
-        <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
-      </p>
-      <ul class="menu-list">
-        <li><a>CS240 Lecture 23</a></li>
-        <li><a class="is-active">MA166 Lecture 13</a></li>
-      </ul>
-      <p class="menu-label">
-        <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
-      </p>
-      <ul class="menu-list">
-        <li><a>CS240 Lecture 23</a></li>
-        <li><a>MA166 Lecture 13</a></li>
-        <li><a>EAPS106 Lecture 12</a></li>
-      </ul>
-    </aside>
+    <div class="content box mainBox">
+      {{fullText}}
+    </div>
   </div>
-  <div class="column has-background-info box">
+  <div class="column has-background-info box mainBox">
     <div class="video">
       <div class="columns is-centered">
         <div class="field column">
@@ -44,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="upload-button">
+    <div class="upload-button" *ngIf="uploader.queue.length > 0">
       
       <progress class="progress is-success" value="{{uploader.queue[0].progress}}" max="100"  *ngIf="uploader.queue[0].progress; else uploadButton">{{uploader.queue[0].progress}}%</progress>
       <ng-template #uploadButton>

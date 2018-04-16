@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { FileUploader,  FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 
 const URL = '/summarizer/';
 
@@ -10,15 +10,30 @@ const URL = '/summarizer/';
 })
 export class UploadComponent implements OnInit {
 
-	public uploader:FileUploader = new FileUploader({
-		url: URL,
-		authToken: localStorage.getItem('jwtToken')
-	});
+	public uploader: FileUploader;
 	fileName: string = "";
+	fullText: string = "";
 
   constructor() { }
 
   ngOnInit() {
+  	this.uploader = new FileUploader({
+			url: URL,
+			authToken: 'Bearer ' + localStorage.getItem('jwtToken')
+		});
+
+  	this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
+    this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+  }
+
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    console.log(response);
+    let res = JSON.parse(response);
+    this.fullText = res.text;
+  }
+
+  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+  	console.log(response);
   }
 
   fileEvent(fileInput: Event){
