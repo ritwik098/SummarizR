@@ -40,12 +40,14 @@ router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) 
 		    console.log(err);
 		    res.send(400, error_object);
 		  } else {
+		  	console.log("body: "+body);
 		    var json = JSON.parse(body);
 		    summarize.sumarize_text(json.transcript, json.metadata.filename, function(error, response) {
 				if (error) {
 					res.send(400, error_object);
 				} else {
 					response.content_url = json.content_url;
+					response.thumbnail_url = json.thumbnail_url;
 					const splitString = json.transcript.split(" ");
 
 					var sentences = [];

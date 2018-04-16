@@ -13,7 +13,8 @@ var userSchema = new mongoose.Schema({
             sentence: String,
             time_stamp: Number
         }],
-        content_url: String
+        content_url: String,
+        thumbnail_url: String
     }]
 });
 
