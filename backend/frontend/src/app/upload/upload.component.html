@@ -1,4 +1,95 @@
-<div class="container columns is-centered">
+<div class="columns">
+  <div class="column is-one-third">
+    <aside class="menu">
+      <p class="menu-label">
+        <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
+      </p>
+      <ul class="menu-list">
+        <li><a>CS240 Lecture 23</a></li>
+        <li><a class="is-active">MA166 Lecture 13</a></li>
+      </ul>
+      <p class="menu-label">
+        <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
+      </p>
+      <ul class="menu-list">
+        <li><a>CS240 Lecture 23</a></li>
+        <li><a>MA166 Lecture 13</a></li>
+        <li><a>EAPS106 Lecture 12</a></li>
+      </ul>
+    </aside>
+  </div>
+  <div class="column has-background-info box">
+    <div class="video">
+      <div class="columns is-centered">
+        <div class="field column">
+          <div class="file is-centered is-large is-boxed is-success has-name">
+            <label class="file-label">
+              <input class="file-input" type="file" name="video" ng2FileSelect [uploader]="uploader" (change)="fileEvent($event)"/>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Upload a Video
+                </span> 
+              </span>
+              <span ng2FileDrop
+                       (fileOver)="fileOverBase($event)"
+                       [uploader]="uploader"
+                       class="file-name">
+                      {{fileName ? fileName : "or drag the video here"}}
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="upload-button">
+      <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        <span class="icon is-small">
+          <i class="fas fa-upload" aria-hidden="true"></i>
+        </span>
+        <span>Upload</span>
+      </button>
+      <progress class="progress is-success" value="60" max="100">60%</progress>
+    </div>
+    <div>
+      <article class="media has-background-white box">
+        <figure class="media-left">
+          <p>13:34</p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+            </p>
+          </div>
+        </div>
+        <div class="media-right">
+          <button class="delete"></button>
+        </div>
+      </article>
+      <article class="media has-background-white box">
+        <figure class="media-left">
+          <p>13:34</p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+            </p>
+          </div>
+        </div>
+        <div class="media-right">
+          <button class="delete"></button>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="container columns is-centered">
   <div class="field column">
     <div class="file is-centered is-large is-boxed is-success has-name">
       <label class="file-label">
@@ -30,4 +121,4 @@
       <span>Upload</span>
     </button>
   </div>
-</div>
+</div> -->

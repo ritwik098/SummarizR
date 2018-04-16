@@ -1,0 +1,18 @@
+.video{
+	height: 360px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	vertical-align: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.upload-button {
+	display: flex;
+	align-items: center;
+	vertical-align: center;
+	align-content: center;
+	justify-content: center;
+	padding: 1em;
+}
