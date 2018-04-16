@@ -100,5 +100,6 @@ function updateNotes(user_id, note) {
 module.exports = {
 	connectToMongo : connectToMongo,
 	checkUserExists : checkUserExists,
-	addUser : addUser
+	addUser : addUser,
+	updateNotes: updateNotes
 }

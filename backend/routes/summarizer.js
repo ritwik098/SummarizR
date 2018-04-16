@@ -5,12 +5,14 @@ var request = require('request');
 const fs = require('fs');
 const config = require('./../config/config');
 var path = require('path');
+var mongo = require('../utils/mongoDBCalls');
+var passport = require('passport');
 
 var error_object = {"message" : "Something went wrong"};
 
 var authenticate_string = 'Basic ' + config.deepgram;
 
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) => {
 	if (!req.files)
 		return res.status(400).send('No files were uploaded.');
 	
@@ -71,7 +73,7 @@ router.post('/', (req, res) => {
 					}
 
 					response.sentences = sentences;
-
+					mongo.updateNotes(req.user._id, response);
 					res.send(JSON.parse(JSON.stringify(response)));
 				}
 
