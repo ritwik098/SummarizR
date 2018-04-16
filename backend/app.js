@@ -43,24 +43,6 @@ app.use('/login', passport.authenticate(['jwt'], { session: false }), index);
 app.use('/users', users);
 app.use('/summarizer', passport.authenticate(['jwt'], { session: false }), summarizer);
 
-app.post('/upload', function(req, res, next) {
-  if (!req.files)
-    return res.status(400).send('No files were uploaded.');
- 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let file = req.files.file;
- 	console.log(file);
-  // Use the mv() method to place the file somewhere on your server
-  file.mv(path.join(__dirname, 'uploads', file.name + '-' + Date.now()), function(err) {
-    if (err){
-      console.log(err);
-      return res.status(500).send(err);
-    }
- 
-    res.send('File uploaded!');
-  });
-});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -78,8 +60,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// console.log(token.generateAccessToken({"id": "askdjfhka"}));
 
 console.log("Success");
 module.exports = app;
