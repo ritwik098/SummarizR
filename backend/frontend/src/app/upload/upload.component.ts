@@ -49,4 +49,17 @@ export class UploadComponent implements OnInit {
     this.fileName = file.name;
 	}
 
+	jumpTo(time: number){
+		var video = <HTMLVideoElement>document.getElementById("mainVideo");
+		video.currentTime = time;
+	}
+
+	getTime(time: number){
+		let number = Math.round(time);
+		let minutes = Math.floor(number / 60);
+		let seconds = number % 60;
+
+		return "" + minutes + ":" + seconds;
+	}
+
 }
