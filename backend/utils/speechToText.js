@@ -13,7 +13,7 @@ function speechToText(filePath) {
   const fileName = 'one';
 
   // Reads a local audio file and converts it to base64
-  const file = fs.readFileSync(path.join(__dirname, '.', 'audioclip-1523824670.mp3'));
+  const file = fs.createReadStream(path.join(__dirname, './resources', 'test_video.mp4'));
   const audioBytes = file.toString('base64');
 
   // The audio file's encoding, sample rate in hertz, and BCP-47 language code

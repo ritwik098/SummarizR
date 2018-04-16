@@ -114,7 +114,7 @@ dll/
 
 # config #
 /config/config.js
-/config/service-account-file.json
+/config/service*
 /bin/ssl/ca*
 /bin/ssl/client*
 /bin/ssl/server*
