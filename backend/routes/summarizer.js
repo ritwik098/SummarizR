@@ -44,6 +44,7 @@ router.post('/', (req, res) => {
 					res.send(400, error_object);
 				} else {
 					response.content_url = json.content_url;
+					response.thumbnail_url = json.thumbnail_url
 					const splitString = json.transcript.split(" ");
 
 					var sentences = [];
