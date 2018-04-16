@@ -1,25 +1,33 @@
-<div class="field">
-  <div class="file is-centered is-large is-boxed is-success has-name">
-    <label class="file-label">
-      <input class="file-input" type="file" ng2FileSelect [uploader]="uploader" />
-      <span class="file-cta">
-        <span class="file-icon">
-          <i class="fas fa-upload"></i>
+<div class="container columns is-centered">
+  <div class="field column">
+    <div class="file is-centered is-large is-boxed is-success has-name">
+      <label class="file-label">
+        <input class="file-input" type="file" name="video" ng2FileSelect [uploader]="uploader" (change)="fileEvent($event)"/>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Upload a Video
+          </span> 
         </span>
-        <span class="file-label">
-          Upload a Lecture
-        </span> 
-      </span>
-      <span class="file-name">
-        Screen Shot 2017-07-29 at 15.54.25.png
-      </span>
-    </label>
+        <span ng2FileDrop
+                 (fileOver)="fileOverBase($event)"
+                 [uploader]="uploader"
+                 class="file-name">
+                {{fileName ? fileName : "or drag the video here"}}
+        </span>
+      </label>
+    </div>
   </div>
-  <div ng2FileDrop
-               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-               (fileOver)="fileOverBase($event)"
-               [uploader]="uploader"
-               class="well my-drop-zone">
-              or drag the video here
-        </div>
+</div>
+<div class="container is-centered">
+  <div class="column">
+    <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+      <span class="icon is-small">
+        <i class="fas fa-upload" aria-hidden="true"></i>
+      </span>
+      <span>Upload</span>
+    </button>
+  </div>
 </div>

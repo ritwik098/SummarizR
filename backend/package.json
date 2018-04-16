@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cd frontend && ng build && cd ../ && node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@google-cloud/speech": "^1.4.0",
@@ -13,6 +13,7 @@
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "deepgram": "^1.0.3",
     "express": "~4.15.5",
     "express-fileupload": "^0.4.0",
     "express-force-ssl": "^0.3.2",

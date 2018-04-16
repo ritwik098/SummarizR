@@ -10,11 +10,20 @@ const URL = '/upload/';
 })
 export class UploadComponent implements OnInit {
 
-	public uploader:FileUploader = new FileUploader({url: URL});
+	public uploader:FileUploader = new FileUploader({
+		url: URL,
+		authToken: localStorage.getItem('jwtToken')
+	});
+	fileName: string = "";
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  fileEvent(fileInput: Event){
+    let file = (<HTMLInputElement>fileInput.target).files[0];
+    this.fileName = file.name;
+	}
 
 }
