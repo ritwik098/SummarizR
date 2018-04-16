@@ -77,6 +77,31 @@ function addUser(user, callback) {
 	}
 }
 
+function getUser(user_id, callback) {
+	if (!user_id) {
+	  callback("Error adding the user!", null);
+	} else {
+	  MongoClient.connect(mongodbUrl, function (err, db) {
+	    if (err) {
+	      callback("We are currently facing some technically difficulties, please try again later!", null);
+	    } else {
+	      var dbo = db.db("summarizr");
+	      dbo.collection("Users").findOne({'_id' : user_id}, function(err, result) {
+	        if (err) {
+	          callback("Error finding the user!", null);
+	        } else {
+	          if (result) {
+	            callback(null, result);
+	          } else  {
+	            callback("User does not exist!", null);
+	          }
+	        }
+	      });
+	    }
+	  });
+	}
+}
+
 function updateNotes(user_id, note) {
     if (!user_id || !note) {
       console.log("Error updating the user!");
@@ -101,5 +126,6 @@ module.exports = {
 	connectToMongo : connectToMongo,
 	checkUserExists : checkUserExists,
 	addUser : addUser,
-	updateNotes: updateNotes
+	updateNotes: updateNotes,
+	getUser: getUser
 }
