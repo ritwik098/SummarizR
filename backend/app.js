@@ -48,10 +48,10 @@ app.post('/upload', function(req, res, next) {
     return res.status(400).send('No files were uploaded.');
  
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let video = req.files.video;
- 	console.log(video);
+  let file = req.files.file;
+ 	console.log(file);
   // Use the mv() method to place the file somewhere on your server
-  video.mv(path.join(__dirname, 'uploads', video.name + '-' + Date.now()), function(err) {
+  file.mv(path.join(__dirname, 'uploads', file.name + '-' + Date.now()), function(err) {
     if (err){
       console.log(err);
       return res.status(500).send(err);
