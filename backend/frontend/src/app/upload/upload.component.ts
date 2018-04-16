@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 
-const URL = '/upload/';
+const URL = '/summarize/';
 
 @Component({
   selector: 'app-upload',

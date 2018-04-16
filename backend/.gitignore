@@ -114,6 +114,7 @@ dll/
 
 # config #
 /config/config.js
+/config/service*
 /bin/ssl/ca*
 /bin/ssl/client*
 /bin/ssl/server*
