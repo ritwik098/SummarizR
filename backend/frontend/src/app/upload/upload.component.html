@@ -45,13 +45,16 @@
       </div>
     </div>
     <div class="upload-button">
-      <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-        <span class="icon is-small">
-          <i class="fas fa-upload" aria-hidden="true"></i>
-        </span>
-        <span>Upload</span>
-      </button>
-      <progress class="progress is-success" value="60" max="100">60%</progress>
+      
+      <progress class="progress is-success" value="{{uploader.queue[0].progress}}" max="100"  *ngIf="uploader.queue[0].progress; else uploadButton">{{uploader.queue[0].progress}}%</progress>
+      <ng-template #uploadButton>
+        <button type="button" class="button is-primary is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          <span class="icon is-small">
+            <i class="fas fa-upload" aria-hidden="true"></i>
+          </span>
+          <span>Upload</span>
+        </button>
+      </ng-template>
     </div>
     <div>
       <article class="media has-background-white box">
