@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Http, Headers, Response, RequestOptions } from '@angular/http';
+import { FileSelectDirective, FileUploadModule } from 'ng2-file-upload';
 
 import { AuthService } from './auth.service';
 
@@ -30,7 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FileUploadModule
   ],
   providers: [
     HttpClientModule,
