@@ -44,8 +44,33 @@ router.post('/', (req, res) => {
 					res.send(400, error_object);
 				} else {
 					response.content_url = json.content_url;
+					const splitString = json.transcript.split(" ");
 
-					
+					var sentences = [];
+
+					for (index in response.sentences) {
+						var value = json.transcript.indexOf(response.sentences[index]);
+
+						var counter = 0;
+						var length = 0;
+						for (word in splitString) {
+							if (length >= value) {
+								break;
+							} else {
+								length += splitString[word].length + 1;
+								counter++;
+							}
+						}
+
+						var object = {
+							'sentence' : response.sentences[index],
+							'time_stamp' : json.times[counter]
+						};
+
+						sentences.push(object);
+					}
+
+					response.sentences = sentences;
 
 					res.send(JSON.parse(JSON.stringify(response)));
 				}
