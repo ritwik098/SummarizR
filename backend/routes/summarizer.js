@@ -15,7 +15,7 @@ var authenticate_string = 'Basic ' + config.deepgram;
 router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) => {
 	if (!req.files)
 		return res.status(400).send('No files were uploaded.');
-	
+	console.log(req.body);
 	let file = req.files.file;
 	var filename = file.name + '-' + Date.now();
 	let title = req.body.title;

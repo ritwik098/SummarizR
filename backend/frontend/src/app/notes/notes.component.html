@@ -13,16 +13,18 @@
 		  </p>
 		  <ul class="menu-list">
 		    <li *ngFor="let title of getKeys(notes)">
-		    	<a (click)="selectNote(title)">{{title}}</a>
+		    	<a (click)="selectNote(title)" [class.is-active]="currentNote.title == title">{{title}}</a>
 		    </li>
 		  </ul>
 		</aside>
   </div>
-  <div class="column has-background-success box">
-  	<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideo">
+  <div class="column has-background-success box" *ngIf="currentNote">
+  	<div class="videoContainer" *ngIf="currentNote.content_url">
+  		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast">
           <source src="{{currentNote.content_url}}" 
                   type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
         </video>
+    </div>
 		<div class="summaries">
       <article class="media has-background-white box" *ngFor="let summary of currentNote.sentences">
         <figure class="media-left">
