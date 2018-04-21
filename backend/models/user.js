@@ -14,7 +14,8 @@ var userSchema = new mongoose.Schema({
             time_stamp: Number
         }],
         content_url: String,
-        thumbnail_url: String
+        thumbnail_url: String,
+        title: String
     }]
 });
 

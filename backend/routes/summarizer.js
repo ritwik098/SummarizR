@@ -18,6 +18,7 @@ router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) 
 	
 	let file = req.files.file;
 	var filename = file.name + '-' + Date.now();
+	let title = req.body.title;
 
 	file.mv(path.join(__dirname, './../resources', filename), function(err) {
 		if (err){
@@ -42,12 +43,17 @@ router.post('/', passport.authenticate(['jwt'], { session: false }), (req, res) 
 		  } else {
 		  	console.log("body: "+body);
 		    var json = JSON.parse(body);
+		    if (!title) {
+		    	title = json.metadata.filename;
+		    }
+
 		    summarize.sumarize_text(json.transcript, json.metadata.filename, function(error, response) {
 				if (error) {
 					res.send(400, error_object);
 				} else {
 					response.content_url = json.content_url;
 					response.thumbnail_url = json.thumbnail_url;
+					response.title = title;
 					const splitString = json.transcript.split(" ");
 
 					var sentences = [];
