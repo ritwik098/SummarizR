@@ -1,89 +1,47 @@
 <div class="columns">
   <div class="column is-one-third">
   	<aside class="menu">
-		  <p class="menu-label">
+		  <!-- <p class="menu-label">
 		    <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
 		  </p>
 		  <ul class="menu-list">
 		    <li><a>CS240 Lecture 23</a></li>
 		    <li><a class="is-active">MA166 Lecture 13</a></li>
-		  </ul>
+		  </ul> -->
 		  <p class="menu-label">
 		    <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
 		  </p>
 		  <ul class="menu-list">
-		    <li><a>CS240 Lecture 23</a></li>
-		    <li><a>MA166 Lecture 13</a></li>
-		    <li><a>EAPS106 Lecture 12</a></li>
+		    <li *ngFor="let title of getKeys(notes)">
+		    	<a (click)="selectNote(title)">{{title}}</a>
+		    </li>
 		  </ul>
 		</aside>
   </div>
   <div class="column has-background-success box">
-  	<video controls style="width:100%;height:360px;" poster="https://www.html5rocks.com/en/tutorials/video/basics/poster.png">
-		  <source src="https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm" 
-		          type='video/webm;codecs="vp8, vorbis"' />
-		  <source src="https://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4" 
-		          type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
-		  <track src="https://www.html5rocks.com/en/tutorials/video/basics/devstories-en.vtt" label="English subtitles" 
-		         kind="subtitles" srclang="en" default />
-		</video>
-		<div>
-			<article class="media has-background-white box">
-			  <figure class="media-left">
-			    <p>13:34</p>
-			  </figure>
-			  <div class="media-content">
-			    <div class="content">
-			      <p>
-			        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-			      </p>
-			    </div>
-			    <!-- <nav class="level is-mobile">
-			      <div class="level-left">
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        </a>
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        </a>
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        </a>
-			      </div>
-			    </nav> -->
-			  </div>
-			  <div class="media-right">
-			    <button class="delete"></button>
-			  </div>
-			</article>
-			<article class="media has-background-white box">
-			  <figure class="media-left">
-			    <p>13:34</p>
-			  </figure>
-			  <div class="media-content">
-			    <div class="content">
-			      <p>
-			        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-			      </p>
-			    </div>
-			    <!-- <nav class="level is-mobile">
-			      <div class="level-left">
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        </a>
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        </a>
-			        <a class="level-item">
-			          <span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        </a>
-			      </div>
-			    </nav> -->
-			  </div>
-			  <div class="media-right">
-			    <button class="delete"></button>
-			  </div>
-			</article>
-		</div>
+  	<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideo">
+          <source src="{{currentNote.content_url}}" 
+                  type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
+        </video>
+		<div class="summaries">
+      <article class="media has-background-white box" *ngFor="let summary of currentNote.sentences">
+        <figure class="media-left">
+          <a class="button is-success" (click)="jumpTo(summary.time_stamp)">
+            <span>{{getTime(summary.time_stamp)}}</span>
+
+            <span class="icon is-small">
+              <i class="fas fa-angle-double-right"></i>
+            </span>
+          </a>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              {{summary.sentence}}
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
   </div>
 </div>
