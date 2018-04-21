@@ -8,6 +8,7 @@ export class User implements Serializable<User>{
   firstname: string;
   lastname: string;
   profilePicture: string;
+  pastNotes: any[];
 
   deserialize(input) {
   	this.id = input.id;
@@ -17,6 +18,7 @@ export class User implements Serializable<User>{
   	this.firstname = input.firstname;
   	this.lastname = input.lastname;
   	this.profilePicture = input.profilePicture;
+    this.pastNotes = input.pastNotes;
   	return this;
   }
 
@@ -29,6 +31,7 @@ export class User implements Serializable<User>{
           firstname : this.firstname,
           lastname : this.lastname,
           profilePicture : this.profilePicture,
+          pastNotes: this.pastNotes
       }
       return obj;
   }

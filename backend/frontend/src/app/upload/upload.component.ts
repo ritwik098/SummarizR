@@ -17,6 +17,7 @@ export class UploadComponent implements OnInit {
 	videoLoaded: boolean = false;
 	videoURL: string = "";
 	thumbnailURL: string = "";
+  uploading: boolean = false;
 
   constructor() { }
 
@@ -28,6 +29,14 @@ export class UploadComponent implements OnInit {
 
   	this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+    this.uploader.onBeforeUploadItem = (item:any) => {
+        console.log("onBeforeUploadItem:", item);
+        this.uploading = true;
+    };
+    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+        console.log("ImageUpload:uploaded:", item, status);
+        this.uploading = false;
+    };
   }
 
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
@@ -41,6 +50,7 @@ export class UploadComponent implements OnInit {
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    console.log("ERROR");
   	console.log(response);
   }
 
