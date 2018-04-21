@@ -11,6 +11,7 @@ const URL = '/summarizer/';
 export class UploadComponent implements OnInit {
 
 	public uploader: FileUploader;
+  title: string = "";
 	fileName: string = "";
 	fullText: string = "";
 	summaries: any[];
@@ -26,7 +27,9 @@ export class UploadComponent implements OnInit {
 			url: URL,
 			authToken: 'Bearer ' + localStorage.getItem('jwtToken')
 		});
-
+    this.uploader.onBuildItemForm = (item, form) => {
+      form.append('title', this.title);
+    };
   	this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
     this.uploader.onBeforeUploadItem = (item:any) => {
