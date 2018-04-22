@@ -18,16 +18,16 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-var fs = require('fs');
-var path = require('path');
+// var fs = require('fs');
+// var path = require('path');
 
-var options = {
-  cert: fs.readFileSync(path.join(__dirname, 'ssl', 'server.crt')),
-  key: fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'))
-};
+// var options = {
+//   cert: fs.readFileSync(path.join(__dirname, 'ssl', 'server.crt')),
+//   key: fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'))
+// };
 
-var https = require('https');
-var server = https.createServer(options, app);
+// var https = require('https');
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
