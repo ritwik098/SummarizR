@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="column has-background-success box mainBox">
-    <h1 class="title has-text-white" *ngIf="videoLoaded; else titleField">{{currentNote.title}}</h1>
+    <h1 class="title has-text-white" *ngIf="videoLoaded; else titleField">{{title}}</h1>
     <ng-template #titleField>
       <div class="field">
         <div class="control">
@@ -20,7 +20,7 @@
           <source src="{{videoURL}}" 
                   type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
         </video>
-        <a class="button is-info is-loading" *ngIf="!videoLoaded">Loading</a>
+        <a class="button is-success is-loading" *ngIf="!videoLoaded">Loading</a>
       </div>
       <ng-template #uploadBox>
         <div class="columns is-centered" >
@@ -40,7 +40,7 @@
                          (fileOver)="fileOverBase($event)"
                          [uploader]="uploader"
                          class="file-name has-text-white has-text-centered">
-                        {{fileName ? fileName : "or drag the video here"}}
+                        {{fileName ? fileName : "or drag a video here"}}
                 </span>
               </label>
             </div>

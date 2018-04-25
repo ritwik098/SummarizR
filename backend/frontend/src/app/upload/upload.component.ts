@@ -51,6 +51,7 @@ export class UploadComponent implements OnInit {
     this.videoLoaded = true;
     this.videoURL = res.content_url;
     this.thumbnailURL = res.thumbnail_url;
+    this.title = res.title;
     this.authService.loadUserFromDatabase().subscribe(
         result => {
           console.log("user: ",result);
