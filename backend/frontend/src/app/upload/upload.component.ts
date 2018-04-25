@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader,  FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
+import { AuthService } from '../auth.service'
 
 const URL = '/summarizer/';
 
@@ -20,7 +21,7 @@ export class UploadComponent implements OnInit {
 	thumbnailURL: string = "";
   uploading: boolean = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   	this.uploader = new FileUploader({
@@ -50,6 +51,14 @@ export class UploadComponent implements OnInit {
     this.videoLoaded = true;
     this.videoURL = res.content_url;
     this.thumbnailURL = res.thumbnail_url;
+    this.authService.loadUserFromDatabase().subscribe(
+        result => {
+          console.log("user: ",result);
+          localStorage.setItem('currentUser', JSON.stringify(result));
+        }, error => {
+          console.log(error);
+        }
+      )
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {

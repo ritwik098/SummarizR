@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
+import { environment } from '../environments/environment';
+import 'rxjs/add/operator/map'
 
 import { Router } from '@angular/router';
 import { User } from './user'
@@ -10,7 +12,9 @@ export class AuthService {
 
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private http: Http) { }
 
   saveJwt(jwtToken: string){
       localStorage.setItem('currentUser', JSON.stringify(this.jwtHelper.decodeToken(jwtToken)));
@@ -39,6 +43,10 @@ export class AuthService {
       } else {
           return null;
       }
+  }
+
+  loadUserFromDatabase() {
+    return this.http.get(environment.apiUrl+'/user/', this.generateJwt()).map((response: Response) => response.json()); 
   }
 
   logout() {
