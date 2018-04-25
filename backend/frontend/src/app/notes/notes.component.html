@@ -33,6 +33,7 @@
         </h2>
       </div>
       <ng-template #notesBox>
+        <h1 class="title has-text-white">{{currentNote.title}}</h1>
       	<div class="videoContainer" *ngIf="currentNote.content_url">
       		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast">
               <source src="{{currentNote.content_url}}" 

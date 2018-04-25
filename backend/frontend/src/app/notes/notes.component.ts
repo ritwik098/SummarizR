@@ -35,7 +35,7 @@ export class NotesComponent implements OnInit {
   }
 
   jumpTo(time: number){
-		var video = <HTMLVideoElement>document.getElementById("mainVideo");
+		var video = <HTMLVideoElement>document.getElementById("mainVideoPast");
 		video.currentTime = time;
 	}
 
