@@ -1,49 +1,65 @@
 <div class="columns">
-  <div class="column is-one-third">
-  	<aside class="menu">
-		  <!-- <p class="menu-label">
-		    <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
-		  </p>
-		  <ul class="menu-list">
-		    <li><a>CS240 Lecture 23</a></li>
-		    <li><a class="is-active">MA166 Lecture 13</a></li>
-		  </ul> -->
-		  <p class="menu-label">
-		    <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
-		  </p>
-		  <ul class="menu-list">
-		    <li *ngFor="let title of getKeys(notes)">
-		    	<a (click)="selectNote(title)" [class.is-active]="currentNote.title == title">{{title}}</a>
-		    </li>
-		  </ul>
-		</aside>
+  <div *ngIf="getKeys(notes).length < 1; else showNotes" class="column has-background-danger box">
+      <div class="hero has-text-centered" *ngIf="!currentNote; else notesBox">
+        <h2 class="subtitle hero-body has-text-white  ">
+          No videos uploaded yet. Go to the upload tab to upload a video!
+        </h2>
+      </div>
   </div>
-  <div class="column has-background-success box" *ngIf="currentNote">
-  	<div class="videoContainer" *ngIf="currentNote.content_url">
-  		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast">
-          <source src="{{currentNote.content_url}}" 
-                  type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
-        </video>
+  <ng-template #showNotes>
+    <div class="column is-one-third">
+    	<aside class="menu">
+  		  <!-- <p class="menu-label">
+  		    <span class="icon"><i class="fas fa-star fa-sm" aria-hidden="true"></i></span>Favorites
+  		  </p>
+  		  <ul class="menu-list">
+  		    <li><a>CS240 Lecture 23</a></li>
+  		    <li><a class="is-active">MA166 Lecture 13</a></li>
+  		  </ul> -->
+  		  <p class="menu-label">
+  		    <span class="icon"><i class="fas fa-history fa-sm" aria-hidden="true"></i></span>Recent
+  		  </p>
+  		  <ul class="menu-list">
+  		    <li *ngFor="let title of getKeys(notes)">
+  		    	<a (click)="selectNote(title)" [class.is-active]="currentNote && currentNote.title == title">{{title}}</a>
+  		    </li>
+  		  </ul>
+  		</aside>
     </div>
-		<div class="summaries">
-      <article class="media has-background-white box" *ngFor="let summary of currentNote.sentences">
-        <figure class="media-left">
-          <a class="button is-success" (click)="jumpTo(summary.time_stamp)">
-            <span>{{getTime(summary.time_stamp)}}</span>
-
-            <span class="icon is-small">
-              <i class="fas fa-angle-double-right"></i>
-            </span>
-          </a>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              {{summary.sentence}}
-            </p>
-          </div>
+    <div class="column has-background-success box">
+     <div class="hero has-text-centered" *ngIf="!currentNote; else notesBox">
+        <h2 class="subtitle hero-body has-text-white  ">
+          Select a video from the sidebar.
+        </h2>
+      </div>
+      <ng-template #notesBox>
+      	<div class="videoContainer" *ngIf="currentNote.content_url">
+      		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast">
+              <source src="{{currentNote.content_url}}" 
+                      type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
+            </video>
         </div>
-      </article>
+    		<div class="summaries">
+          <article class="media has-background-white box" *ngFor="let summary of currentNote.sentences">
+            <figure class="media-left">
+              <a class="button is-success" (click)="jumpTo(summary.time_stamp)">
+                <span>{{getTime(summary.time_stamp)}}</span>
+
+                <span class="icon is-small">
+                  <i class="fas fa-angle-double-right"></i>
+                </span>
+              </a>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  {{summary.sentence}}
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </ng-template>
     </div>
-  </div>
+  </ng-template>
 </div>

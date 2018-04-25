@@ -13,7 +13,7 @@ export class NotesComponent implements OnInit {
 
 	user: User;
 	notes = new Map<string, any>();
-	currentNote: any = {};
+	currentNote: any = null;
 
   constructor(private authService: AuthService) { }
 
