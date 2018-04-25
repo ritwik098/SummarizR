@@ -20,8 +20,9 @@ require('./config/passport');
 
 var app = express();
 var forceSsl = require('express-force-ssl');
-
+var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 app.use(passport.initialize());
+app.use(redirectToHTTPS([], [], 301));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(forceSsl);
 app.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
 
