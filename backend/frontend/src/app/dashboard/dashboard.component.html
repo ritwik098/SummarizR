@@ -17,6 +17,8 @@
         </li>
       </ul>
     </div>
+    <h1 class="title" *ngIf="uploading">Processing the video...</h1>
+
     
     <app-upload *ngIf="onUpload" (onUploading)="onUploading($event)"></app-upload>
     <app-notes *ngIf="!onUpload"></app-notes>
