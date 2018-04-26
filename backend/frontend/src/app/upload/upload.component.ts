@@ -12,6 +12,8 @@ const URL = '/summarizer/';
 export class UploadComponent implements OnInit {
 
 	public uploader: FileUploader;
+  public hasBaseDropZoneOver:boolean = false;
+  public hasAnotherDropZoneOver:boolean = false;
   title: string = "";
 	fileName: string = "";
 	fullText: string = "";
@@ -84,5 +86,15 @@ export class UploadComponent implements OnInit {
 
 		return "" + minutes + ":" + seconds;
 	}
+
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+    let file = this.uploader.queue[0].file;
+    this.fileName = file.name;
+  }
+ 
+  public fileOverAnother(e:any):void {
+    this.hasAnotherDropZoneOver = e;
+  }
 
 }

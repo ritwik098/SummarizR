@@ -37,10 +37,11 @@
                   </span> 
                 </span>
                 <span ng2FileDrop
-                         (fileOver)="fileOverBase($event)"
-                         [uploader]="uploader"
-                         class="file-name has-text-white has-text-centered">
-                        {{fileName ? fileName : "or drag a video here"}}
+                 [ngClass]="{'has-background-danger': hasBaseDropZoneOver}"
+                 (fileOver)="fileOverBase($event)"
+                 [uploader]="uploader"
+                 class="file-name has-text-white has-text-centered">
+                  {{fileName ? fileName : "or drag a video here"}}
                 </span>
               </label>
             </div>
