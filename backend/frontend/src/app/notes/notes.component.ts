@@ -18,7 +18,15 @@ export class NotesComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-  	this.user = this.authService.loadUserFromLocalStorage();
+    this.authService.loadUserFromDatabase().subscribe(
+      result => {
+        console.log("user: ",result);
+        localStorage.setItem('currentUser', JSON.stringify(result));
+        this.user = result;
+      }, error => {
+        console.log(error);
+      }
+    );
   	for(let note of this.user.pastNotes){
   		this.notes.set(note.title, note);
   	}

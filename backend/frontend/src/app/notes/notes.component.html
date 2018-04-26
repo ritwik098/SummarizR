@@ -1,5 +1,5 @@
 <div class="columns">
-  <div *ngIf="getKeys(notes).length < 1; else showNotes" class="column has-background-danger box">
+  <div *ngIf="!getKeys(notes) || getKeys(notes).length < 1; else showNotes" class="column has-background-danger box">
       <div class="hero has-text-centered" *ngIf="!currentNote; else notesBox">
         <h2 class="subtitle hero-body has-text-white  ">
           No videos uploaded yet. Go to the upload tab to upload a video!
