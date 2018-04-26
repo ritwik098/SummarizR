@@ -1,7 +1,10 @@
 <div class="columns">
-  <div *ngIf="!getKeys(notes) || getKeys(notes).length < 1; else showNotes" class="column has-background-danger box">
+  <div *ngIf="!getKeys(notes) || getKeys(notes).length < 1; else showNotes" class="column box" [class.has-background-danger]="!loading">
       <div class="hero has-text-centered" *ngIf="!currentNote; else notesBox">
-        <h2 class="subtitle hero-body has-text-white  ">
+        <h2 class="subtitle hero-body" *ngIf="loading">
+          Loading...
+        </h2>
+        <h2 class="subtitle hero-body has-text-white" *ngIf="!loading">
           No videos uploaded yet. Go to the upload tab to upload a video!
         </h2>
       </div>

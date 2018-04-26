@@ -14,10 +14,12 @@ export class NotesComponent implements OnInit {
 	user: User;
 	notes = new Map<string, any>();
 	currentNote: any = null;
+  loading: boolean = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.authService.loadUserFromDatabase().subscribe(
       result => {
         console.log("user: ",result);
@@ -27,8 +29,10 @@ export class NotesComponent implements OnInit {
           this.notes.set(note.title, note);
         }
         console.log(this.notes);
+        this.loading = false;
       }, error => {
         console.log(error);
+        this.loading = false;
       }
     );
   }
