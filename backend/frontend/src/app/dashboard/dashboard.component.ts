@@ -12,11 +12,16 @@ export class DashboardComponent implements OnInit {
 
 	user: User;
 	onUpload: boolean = true;
+	uploading: boolean = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   	this.user = this.authService.loadUserFromLocalStorage();
+  }
+
+  onUploading(uploading: boolean) {
+    this.uploading = uploading;
   }
 
 }

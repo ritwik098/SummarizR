@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <section class="section">
   <div class="container is-fullhd">
-    <div class="tabs is-fullwidth is-medium is-toggle is-toggle-rounded">
+    <div class="tabs is-fullwidth is-medium is-toggle is-toggle-rounded" *ngIf="!uploading">
       <ul>
         <li [class.is-active]="onUpload">
           <a (click)="onUpload = !onUpload">
@@ -18,7 +18,7 @@
       </ul>
     </div>
     
-    <app-upload *ngIf="onUpload"></app-upload>
+    <app-upload *ngIf="onUpload" (onUploading)="onUploading($event)"></app-upload>
     <app-notes *ngIf="!onUpload"></app-notes>
 
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FileUploader,  FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AuthService } from '../auth.service'
 
@@ -11,6 +11,7 @@ const URL = '/summarizer/';
 })
 export class UploadComponent implements OnInit {
 
+  @Output() onUploading = new EventEmitter<boolean>();
 	public uploader: FileUploader;
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
@@ -38,12 +39,14 @@ export class UploadComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
     this.uploader.onBeforeUploadItem = (item:any) => {
         console.log("onBeforeUploadItem:", item);
+        this.onUploading.emit(true);
         this.uploading = true;
         this.invalid = false;
         
     };
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
         console.log("ImageUpload:uploaded:", item, status);
+        this.onUploading.emit(false);
         this.uploading = false;
     };
   }
