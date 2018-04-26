@@ -22,6 +22,7 @@ export class UploadComponent implements OnInit {
 	videoURL: string = "";
 	thumbnailURL: string = "";
   uploading: boolean = false;
+  invalid: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -38,6 +39,8 @@ export class UploadComponent implements OnInit {
     this.uploader.onBeforeUploadItem = (item:any) => {
         console.log("onBeforeUploadItem:", item);
         this.uploading = true;
+        this.invalid = false;
+        
     };
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
         console.log("ImageUpload:uploaded:", item, status);
@@ -72,6 +75,11 @@ export class UploadComponent implements OnInit {
   fileEvent(fileInput: Event){
     let file = (<HTMLInputElement>fileInput.target).files[0];
     this.fileName = file.name;
+    if(file.size > 40000000){
+      this.invalid = true;
+    } else {
+      this.invalid = false;
+    }
 	}
 
 	jumpTo(time: number){
@@ -91,6 +99,11 @@ export class UploadComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
     let file = this.uploader.queue[0].file;
     this.fileName = file.name;
+    if(file.size > 40000000){
+      this.invalid = true;
+    } else {
+      this.invalid = false;
+    }
   }
  
   public fileOverAnother(e:any):void {

@@ -52,7 +52,7 @@
     <div class="upload-button" *ngIf="!videoLoaded">
       <progress class="progress is-info" value="{{uploader.queue[0].progress}}" max="100"  *ngIf="uploader.queue.length > 0 && uploader.queue[0].progress != 0; else uploadButton">{{uploader.queue[0].progress}}%</progress>
       <ng-template #uploadButton>
-        <button type="button" class="button is-info is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length" *ngIf="!uploading">
+        <button type="button" class="button is-info is-centered is-medium" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length || invalid" *ngIf="!uploading">
           <span class="icon is-small">
             <i class="fas fa-upload" aria-hidden="true"></i>
           </span>
@@ -60,6 +60,8 @@
         </button>
       </ng-template>
     </div>
+    <div class="box has-background-danger has-text-white has-text-centered" *ngIf="invalid"><p>The file cannot be larger 40MBs!</p></div>
+
     <div class="summaries" *ngIf="summaries">
       <article class="media has-background-white box" *ngFor="let summary of summaries">
         <figure class="media-left">
