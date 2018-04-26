@@ -34,9 +34,9 @@
       </div>
       <ng-template #notesBox>
         <h1 class="title has-text-white">{{currentNote.title}}</h1>
-      	<div class="videoContainer" *ngIf="currentNote.content_url">
-      		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast">
-              <source src="{{currentNote.content_url}}" 
+      	<div class="videoContainer" *ngFor="let note of getValues(notes)">
+      		<video controls style="width:100%;height:360px;" poster="{{currentNote.thumbnail_url}}" id="mainVideoPast" *ngIf="note.content_url == currentNote.content_url">
+              <source [src]="note.content_url" 
                       type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
             </video>
         </div>

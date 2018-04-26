@@ -29,6 +29,10 @@ export class NotesComponent implements OnInit {
     return Array.from(map.keys());
   }
 
+  getValues(map){
+    return Array.from(map.values());
+  }
+
   selectNote(title: string){
   	this.currentNote = this.notes.get(title);
   	console.log(this.currentNote);
