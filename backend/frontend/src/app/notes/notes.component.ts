@@ -27,10 +27,6 @@ export class NotesComponent implements OnInit {
         console.log(error);
       }
     );
-  	for(let note of this.user.pastNotes){
-  		this.notes.set(note.title, note);
-  	}
-  	console.log(this.notes);
   }
 
   getKeys(map){
