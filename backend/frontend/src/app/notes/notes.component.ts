@@ -23,6 +23,10 @@ export class NotesComponent implements OnInit {
         console.log("user: ",result);
         localStorage.setItem('currentUser', JSON.stringify(result));
         this.user = result;
+	for(let note of this.user.pastNotes){
+  		this.notes.set(note.title, note);
+  	}
+  	console.log(this.notes);
       }, error => {
         console.log(error);
       }
