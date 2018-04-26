@@ -77,6 +77,7 @@ export class UploadComponent implements OnInit {
     this.fileName = file.name;
     if(file.size > 40000000){
       this.invalid = true;
+      this.uploader.queue[0].remove();
     } else {
       this.invalid = false;
     }
@@ -101,6 +102,7 @@ export class UploadComponent implements OnInit {
     this.fileName = file.name;
     if(file.size > 40000000){
       this.invalid = true;
+      this.uploader.queue[0].remove();
     } else {
       this.invalid = false;
     }
