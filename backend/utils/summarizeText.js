@@ -26,9 +26,10 @@ function sumarize_text(text, title, callback) {
 	textapi.summarize({
 		'text': text,
 		'title' : title,
-		'sentences_percentage' : 60
+		'sentences_percentage' : 35
 	}, function(error, response) {
-	  	callback(error, response);
+	  	console.log(response);
+		callback(error, response);
 	});
 }
 
